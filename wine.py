@@ -7,16 +7,19 @@ def main():
     pass
 
 
-# from pywebio.output import *
-# from pywebio.input import *
-
-
 def mixed_in_s02(value):
     try:
         value == int(value)
     except ValueError:
         [put_buttons(['A'], onclick=put_text)]
 
+def moving_decimal(num):
+    num /= 1000.
+    return num
+
+def calculating_sO2(desired_sO2, gallons):
+    bring_up = desired_sO2 * 3.785 * gallons / 0.57
+    return round(bring_up, 2)
 
 def temperature_convertor(temperature):
     celsius = int(((temperature - 32) * 5) / 9)
@@ -53,7 +56,7 @@ def main():
     date_crushed = input("Date grapes crushed:", placeholder="Date grapes crushed", required=True)
     gallons = input("Gallons produced after crushing", type=NUMBER, placeholder="Gallons produced", required=True)
 
-    with put_collapse("Date crushed Weight Crushed Gallons"):
+    with put_collapse("Date crushed | Weight | Crushed Gallons"):
         put_table([
             ['Date crushed', 'Weight Crushed', 'Gallons'],
             [put_text("%s" % date_crushed), put_text("%slbs" % tons), put_text("%s" % gallons)]
